@@ -1,0 +1,29 @@
+yum install qemu-kvm qemu-img virt-manager libvirt-* virt-install virt-viewer bridge-utils
+
+systemctl start libvirt
+systemctl enable libvirt
+systemctl start libvirtd-guests
+systemctl enable libvirtd-guests¸
+
+virt-manager
+// 
+Napraviti æemo dvije mreže - jednu preko koje æemo pristupiti na fizièku mrežu kako bismo
+mogli napraviti instalaciju, i drugu (privatnu mrežu), testa radi. Otvorite meni Edit, pa u njemu
+pronaðite tab "Connection Details" i kroz wizard (+ na dnu prozora) napravite slijedeæe dvije
+mreže:
+1. Mrežu imena “NATnetwork”, IP adresni raspon 192.168.100.0/24, sa ukljuèenim DHCP
+serverom i rasponom DHCP adresa od 192.168.100.128-254. Ukljuèiti u zadnjem
+prozoru wizarda opciju”Forwarding to physical network”, sa odredištem (Destination)
+“Physical device ens160” i naèinom rada (Mode) “NAT”.
+2. Mrežu imena “PrivateNetwork”, IP adresni raspon 192.168.200.0/24, sa ukljuèenim
+DHCP serverom I rasponom adresa od 192.168.200.128-254. Ukljuèiti u zadnjem
+prozoru wizarda opciju “Isolated virtual network”.
+//
+
+yum –y update
+
+virsh
+virt-install
+
+virt-install --name Test1 --ram 1024 --disk path=/var/lib/libvirt/images/Test1.img,size=10 --network network:default --vnc --os-variant=rhel6 --location=http://10.10.7.27/C6
+

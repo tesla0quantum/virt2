@@ -1,0 +1,32 @@
+[root@zr-esxia:~] esxcli network vswitch standard portgroup list
+Name                Virtual Switch  Active Clients  VLAN ID
+------------------  --------------  --------------  -------
+IPStorage1          vSwitch1                     1        0
+IPStorage2          vSwitch2                     1        0
+Management Network  vSwitch0                     1        0
+Produkcija          vSwitch0                     1        0
+VM Network          vSwitch0                     0        0
+[root@zr-esxia:~]
+
+[root@zr-esxib:~] esxcli network vswitch standard portgroup list
+Name                Virtual Switch  Active Clients  VLAN ID
+------------------  --------------  --------------  -------
+IPStorage1          vSwitch1                     1        0
+IPStorage2          vSwitch2                     1        0
+Management Network  vSwitch0                     1        0
+Produkcija          vSwitch0                     1        0
+VM Network          vSwitch0                     0        0
+[root@zr-esxib:~]
+
+
+
+esxcli storage nfs add --host=172.16.111.10 --share=/mnt/zpool1/iso --volume-name=SharedNFS-ZR
+
+esxcli storage nfs list
+
+[root@zr-esxia:~] esxcli storage nfs add --host=172.16.111.10 --share=/mnt/zpool1/iso --volume-name=SharedNFS-ZR
+[root@zr-esxia:~] esxcli storage nfs list
+Volume Name   Host           Share            Accessible  Mounted  Read-Only   isPE  Hardware Acceleration
+------------  -------------  ---------------  ----------  -------  ---------  -----  ---------------------
+SharedNFS-ZR  172.16.111.10  /mnt/zpool1/iso        true     true      false  false  Not Supported
+[root@zr-esxia:~]
